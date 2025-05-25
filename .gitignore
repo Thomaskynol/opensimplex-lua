@@ -1,5 +1,7 @@
 *.o
 open-simplex-noise-test
 open-simplex-noise.o
+*.dll
 *.png
+*.so
 

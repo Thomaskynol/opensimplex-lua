@@ -1,23 +1,18 @@
-all:	open-simplex-noise.o	open-simplex-noise-test
+CC = gcc
+CFLAGS = -O3 -Wall -Wextra -fPIC
+SRC = open-simplex-noise.c
+OBJ = open-simplex-noise.o
 
-SANITIZE=
-# SANITIZE=-fsanitize=undefined
-# SANITIZE=-fsanitize=address
-CFLAGS=-W -Wall -Wextra -O3 ${SANITIZE}
-#CFLAGS=-W -Wall -Wextra -g
+.PHONY: linux windows clean
 
-open-simplex-noise-test:	open-simplex-noise-test.c open-simplex-noise.o
-	${CC} ${CFLAGS} -o open-simplex-noise-test open-simplex-noise.o open-simplex-noise-test.c -lpng
+linux: $(OBJ)
+	$(CC) -shared -o open_simplex.so $(OBJ)
 
-open-simplex-noise.o:	open-simplex-noise.h open-simplex-noise.c Makefile
-	${CC} ${CFLAGS} -c open-simplex-noise.c
+windows: $(OBJ)
+	$(CC) -shared -o open_simplex.dll $(OBJ)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f open-simplex-noise.o open-simplex-noise-test test2d.png test3d.png test4d.png
-
-scan-build:
-	make clean
-	rm -fr /tmp/osn-scan-build-output
-	scan-build -o /tmp/osn-scan-build-output make CC=clang
-	xdg-open /tmp/osn-scan-build-output/*/index.html
-
+	del /Q $(OBJ) open_simplex.so open_simplex.dll 2>nul || true
