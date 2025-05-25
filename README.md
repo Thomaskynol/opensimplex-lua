@@ -65,5 +65,6 @@ MIT License – see [LICENSE](./LICENSE)
 
 ## 🙌 Credits
 
-* Original algorithm by [Kurt Spencer](https://gist.github.com/KdotJPG)
-* LuaJIT FFI bindings by [Thomas](https://github.com/thomasbravou)
+- [Kurt Spencer](https://gist.github.com/KdotJPG/b1270127455a94ac5d19) – Original creator of the OpenSimplex noise algorithm (Java implementation)
+- [smcameron](https://github.com/smcameron/open-simplex-noise-in-c) – C port of Kurt Spencer’s implementation
+- [Thomas](https://github.com/Thomaskynol/opensimplex-lua) – LuaJIT FFI bindings and Lua integration
